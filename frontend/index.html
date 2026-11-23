@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurant Billing Management System</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Service Worker Cleanup & Cache Busting for localhost:5173 -->
+    <script>
+      (function() {
+        // Unregister any stale Service Worker registered by previous projects on this port
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            var unregisteredAny = false;
+            for (var i = 0; i < registrations.length; i++) {
+              registrations[i].unregister();
+              unregisteredAny = true;
+              console.info('[System] Unregistered stale service worker:', registrations[i].scope);
+            }
+            if (unregisteredAny && !sessionStorage.getItem('__sw_purged__')) {
+              sessionStorage.setItem('__sw_purged__', 'true');
+              window.location.reload();
+            }
+          });
+        }
+        // Purge CacheStorage from previous projects on this origin
+        if ('caches' in window) {
+          caches.keys().then(function(cacheNames) {
+            for (var j = 0; j < cacheNames.length; j++) {
+              caches.delete(cacheNames[j]);
+              console.info('[System] Purged stale cache:', cacheNames[j]);
+            }
+          });
+        }
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-neutral-50 text-neutral-900">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
