@@ -13,6 +13,21 @@ const getTables = async (req, res, next) => {
       })
       .sort({ tableNumber: 1 });
 
+    // Self-heal: If table is marked running but has no active running order, free it
+    for (const table of tables) {
+      if (
+        table.status === 'running' &&
+        (!table.currentOrder || table.currentOrder.status !== 'running')
+      ) {
+        table.status = 'free';
+        table.currentOrder = null;
+        await Table.updateOne(
+          { _id: table._id },
+          { status: 'free', currentOrder: null }
+        );
+      }
+    }
+
     // Ensure custom sort order: T1, T2, ... T10
     tables.sort((a, b) => {
       const numA = parseInt(a.tableNumber.replace('T', ''), 10);
