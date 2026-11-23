@@ -77,16 +77,16 @@ export default function Sidebar({ isOpen, onClose }) {
     },
     {
       name: 'Staff & Roles',
-      path: '#staff',
+      path: '/staff',
       icon: Users,
-      badge: 'Phase 5',
+      badge: 'Admin',
       allowedRoles: ['admin'], // Admin only
     },
     {
       name: 'System Settings',
-      path: '#settings',
+      path: '/settings',
       icon: Settings,
-      badge: 'Phase 5',
+      badge: 'Config',
       allowedRoles: ['admin'], // Admin only
     },
   ];

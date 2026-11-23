@@ -7,6 +7,8 @@ const orderRoutes = require('./order.routes');
 const billRoutes = require('./bill.routes');
 const dashboardRoutes = require('./dashboard.routes');
 const reportRoutes = require('./report.routes');
+const staffRoutes = require('./staff.routes');
+const settingsRoutes = require('./settings.routes');
 
 const router = express.Router();
 
@@ -33,5 +35,11 @@ router.use('/dashboard', dashboardRoutes);
 
 // Reporting endpoints mounted at /reports -> /api/reports
 router.use('/reports', reportRoutes);
+
+// Staff management endpoints mounted at /staff -> /api/staff
+router.use('/staff', staffRoutes);
+
+// System settings endpoints mounted at /settings -> /api/settings
+router.use('/settings', settingsRoutes);
 
 module.exports = router;

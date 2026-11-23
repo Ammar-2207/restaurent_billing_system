@@ -12,6 +12,8 @@ import OrdersPage from '../pages/OrdersPage';
 import MenuPage from '../pages/MenuPage';
 import BillingPage from '../pages/BillingPage';
 import BillsPage from '../pages/BillsPage';
+import StaffPage from '../pages/StaffPage';
+import SettingsPage from '../pages/SettingsPage';
 import AccessDeniedPage from '../pages/AccessDeniedPage';
 import NotFoundPage from '../pages/NotFoundPage';
 
@@ -44,6 +46,22 @@ export default function AppRoutes() {
         <Route path="/menu" element={<MenuPage />} />
         <Route path="/billing" element={<BillingPage />} />
         <Route path="/bills" element={<BillsPage />} />
+        <Route
+          path="/staff"
+          element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <StaffPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <SettingsPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/diagnostics" element={<HomePage />} />
         <Route path="/access-denied" element={<AccessDeniedPage />} />
       </Route>
